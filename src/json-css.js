@@ -25,6 +25,9 @@
 			if (mediaQuery){
 				ruleString += "@media ";
 				mediaQuery.forEach(function(query, index, querySet){
+					if (index > 0){
+						ruleString += " and "
+					}
 					ruleString += "(" + query + ")";
 				});
 				ruleString += "{";
