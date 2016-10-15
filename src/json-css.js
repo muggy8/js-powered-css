@@ -13,8 +13,23 @@
 			return styleEle;
 		})();
 		
-		var buildStyle = function(styleList){
+		var buildStyle = function(mediaQuery, styleList){
+			
+			//type cast the media query into an array
+			if (typeof mediaQuery === "string" && mediaQuery){
+				mediaQuery = [mediaQuery];
+			}
+			
 			var ruleString = "";
+			// if media query exists
+			if (mediaQuery){
+				ruleString += "@media ";
+				mediaQuery.forEach(function(query, index, querySet){
+					ruleString += "(" + query + ")";
+				});
+				ruleString += "{";
+			}
+			
 			styleList.forEach(function(cssRule, index, array){
 				//console.log(Object.keys(cssRule));
 				ruleString += cssRule.selector.toString() + "{";
@@ -23,9 +38,18 @@
 				});
 				ruleString += "}";
 			});
+			
+			if (mediaQuery){
+				ruleString += "}";
+			}
 			return ruleString;
 		};
 		
-		styleRenderer.innerHTML = buildStyle(this.styleSet);
+		var renderedRuleset = "";
+		this.styleSet.forEach(function(querySet, index, JSONstyleSheet){
+			renderedRuleset += buildStyle(querySet.mediaQuery, querySet.ruleCluster);
+		});
+		
+		styleRenderer.innerHTML = renderedRuleset;
 	}
 })(window.jsonCSS || (window.jsonCSS = {}))
