@@ -1,0 +1,18 @@
+[
+	{
+		"selector":["body", "html", "main"],
+		"rules":{
+			"padding":"0",
+			"width":"100%",
+			"margin":"0"
+		}
+	},
+	
+	{
+		"selector":"html",
+		"rules":{
+			"font-size":"16px",
+			"font-face":"Arial, Helvetica, sans-serif"
+		}
+	}
+]
