@@ -1,10 +1,6 @@
+"use strict";
 (function(jsonCSS){
-	"use strict";
-	
-	jsonCSS.styleSet = jsonCSS.styleSet || [];
-	
-	jsonCSS.render = function(){
-		
+	jsonCSS.prototype.render = function(){
 		// initialize the style renderer
 		var styleRenderer = document.querySelector("#json-css") || (function (){
 			var styleEle = document.createElement("style");
@@ -55,4 +51,20 @@
 		
 		styleRenderer.innerHTML = renderedRuleset;
 	}
-})(window.jsonCSS || (window.jsonCSS = {}))
+})(window.jsonCSS || 
+	(window.jsonCSS = function(styles){
+		this.styleSet;
+		
+		if (typeof styles == "string"){
+			console.log("this is a URL and I'm not ready for that yet");
+		}
+		if (typeof styles == "object"){
+			this.styleSet = styles || [];
+		}
+	})
+)
+
+/*
+
+	
+*/

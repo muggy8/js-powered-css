@@ -1,7 +1,9 @@
 (function(jsonCSS){
 	"use strict";
 	
-	jsonCSS.prototype.render = function(){
+	jsonCSS.styleSet = jsonCSS.styleSet || [];
+	
+	jsonCSS.render = function(){
 		
 		// initialize the style renderer
 		var styleRenderer = document.querySelector("#json-css") || (function (){
@@ -53,4 +55,4 @@
 		
 		styleRenderer.innerHTML = renderedRuleset;
 	}
-})(window.jsonCSS || (window.jsonCSS = function(styles){this.jsonCSS.styleSet = styles || []}))
+})(window.jsonCSS || (window.jsonCSS = {}))
