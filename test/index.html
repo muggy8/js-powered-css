@@ -6,81 +6,84 @@
 	<body>
 		<script>
 			(function(){
-				var stylesheet = new jsonCSS([
-					{
-						"mediaQuery":"",
-						"ruleCluster":[
-							{
-								"selector":["body", "html", "main"],
-								"rules":{
-									"padding":"0",
-									"width":"100%",
-									"margin":"0"
+				var stylesheet = new jsonCSS(
+					[
+						{
+							"mediaQuery":"",
+							"ruleCluster":[
+								{
+									"selector":["body", "html", "main"],
+									"rules":{
+										"padding":"0",
+										"width":"100%",
+										"margin":"0"
+									}
+								},
+								
+								{
+									"selector":"html",
+									"rules":{
+										"font-size":"16px",
+										"font-face":"Arial, Helvetica, sans-serif"
+									}
+								},
+								
+								{
+									"selector":["main", "section"],
+									"rules":{
+										"padding":"1em",
+										"background-color":"blue"
+									}
 								}
-							},
-							
-							{
-								"selector":"html",
-								"rules":{
-									"font-size":"16px",
-									"font-face":"Arial, Helvetica, sans-serif"
+							]
+						},
+						{
+							"mediaQuery":["min-width: 768px", "screen"],
+							"ruleCluster":[
+								{
+									"selector": ["main", "section"],
+									"rules":{
+										"padding-top":"0.5em",
+										"padding-bottom":"0.5em"
+									}
+								},
+								{
+									"selector":"section",
+									"rules":{
+										"padding-right":"0",
+										"padding-left":"0",
+										"background-color":"red"
+									}
 								}
-							},
-							
-							{
-								"selector":["main", "section"],
-								"rules":{
-									"padding":"1em",
-									"background-color":"blue"
-								}
-							}
-						]
-					},
-					{
-						"mediaQuery":["min-width: 768px", "screen"],
-						"ruleCluster":[
-							{
-								"selector": ["main", "section"],
-								"rules":{
-									"padding-top":"0.5em",
-									"padding-bottom":"0.5em"
-								}
-							},
-							{
-								"selector":"section",
-								"rules":{
-									"padding-right":"0",
-									"padding-left":"0",
-									"background-color":"red"
-								}
-							}
-						]
-					}
-				]); 
+							]
+						}
+					]
+				); 
 				
 				stylesheet.render("style-general");
 				
-				var stylesheetMD = new jsonCSS([
-							{
-								"selector": ["main", "section"],
-								"rules":{
-									"padding-top":"1em",
-									"padding-bottom":"1em"
-								}
-							},
-							{
-								"selector":"section",
-								"rules":{
-									"padding-right":"0",
-									"padding-left":"0",
-									"background-color":"blue"
-								}
+				var stylesheetMD = new jsonCSS(
+					[
+						{
+							"selector": ["main", "section"],
+							"rules":{
+								"padding-top":"1em",
+								"padding-bottom":"1em"
 							}
-						]
-				
+						},
+						{
+							"selector":"section",
+							"rules":{
+								"padding-right":"0",
+								"padding-left":"0",
+								"background-color":"blue"
+							}
+						}
+					]
+					, "styles-md"
 				);
 				
-				stylesheetMD.render("styles-md");
+				stylesheetMD.render();
 			})()
 		</script>
 	</body>
