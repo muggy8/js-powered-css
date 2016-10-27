@@ -1,10 +1,11 @@
 "use strict";
 (function(jsonCSS){
-	jsonCSS.prototype.render = function(){
+	jsonCSS.prototype.render = function(styleID){
 		// initialize the style renderer
-		var styleRenderer = document.querySelector("#json-css") || (function (){
+		var styleID = styleID || "json-css";
+		var styleRenderer = document.querySelector("#" + styleID) || (function (){
 			var styleEle = document.createElement("style");
-			styleEle.setAttribute("id", "json-css");
+			styleEle.setAttribute("id", styleID);
 			document.querySelector("body").appendChild(styleEle);
 			return styleEle;
 		})();
@@ -45,8 +46,21 @@
 		};
 		
 		var renderedRuleset = "";
+		
+		var renderedMeadlessOnce = false;
 		this.styleSet.forEach(function(querySet, index, JSONstyleSheet){
-			renderedRuleset += buildStyle(querySet.mediaQuery, querySet.ruleCluster);
+			console.log(typeof querySet.mediaQuery);
+			if (typeof querySet.mediaQuery != "undefined"){ // there's a media query with this set
+				renderedRuleset += buildStyle(querySet.mediaQuery, querySet.ruleCluster);
+			}
+			else{ // it's just a set without a media query
+				if (renderedMeadlessOnce){ // gotta just return if its already done work out
+					return;
+				}
+				console.log( JSONstyleSheet);
+				renderedRuleset += buildStyle("", JSONstyleSheet);
+				renderedMeadlessOnce = true;
+			}
 		});
 		
 		styleRenderer.innerHTML = renderedRuleset;

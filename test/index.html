@@ -58,7 +58,29 @@
 					}
 				]); 
 				
-				stylesheet.render();
+				stylesheet.render("style-general");
+				
+				var stylesheetMD = new jsonCSS([
+							{
+								"selector": ["main", "section"],
+								"rules":{
+									"padding-top":"1em",
+									"padding-bottom":"1em"
+								}
+							},
+							{
+								"selector":"section",
+								"rules":{
+									"padding-right":"0",
+									"padding-left":"0",
+									"background-color":"blue"
+								}
+							}
+						]
+				
+				);
+				
+				stylesheetMD.render("styles-md");
 			})()
 		</script>
 	</body>
