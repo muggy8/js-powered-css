@@ -64,6 +64,7 @@
 				
 				styleList.forEach(function(cssRule, index, array){
 					//console.log(Object.keys(cssRule));
+					if (!cssRule.selector){return};
 					ruleString += cssRule.selector.toString() + "{";
 					Object.keys(cssRule.rules).forEach(function(ruleName, ruleIndex, ruleStylings){
 						ruleString += ruleName + ":" + cssRule.rules[ruleName] + ";";
