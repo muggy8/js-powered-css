@@ -104,6 +104,11 @@
 		}
 		
 		this.clear = function(selector){
+			if (typeof selector !== "string"){//check to see that selector is indeed a string
+				selector = "";
+				console.warn("Selector for clearer is not a string and is ignored.")
+			}
+			
 			for (var i = 0; i < renderedStylesList.length; i++){
 				var styleEle = renderedStylesList[i];
 				
