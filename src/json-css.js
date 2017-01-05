@@ -3,19 +3,20 @@
 	// global constants out here.... there's none yet
 	
 	window.jsonCSS = function(styles, elementID){
-		//public properties
-		this.styleSet;
-		
-		//private properties
+		//properties
 		var id = elementID || "json-css";
 		var renderedStylesList = [];
+		var styleSet;
+		
+		//make property public
+		this.styleSet = styleSet;
 		
 		// constructor
 		if (typeof styles == "string"){
 			console.log("this is a URL and I'm not ready for that yet");
 		}
 		if (typeof styles == "object"){
-			this.styleSet = styles || [];
+			styleSet = styles || [];
 		}
 		
 		// public methods (instantiated every time this class is made)
@@ -29,6 +30,10 @@
 		
 		this.render = function(styleID){
 			// initialize the style renderer
+			if (typeof styleID !== "string"){//check to see that styleID is indeed a string
+				styleID = "";
+				console.warn("Selector for render is not a string and is ignored.")
+			}
 			var styleID = styleID || id;
 			var styleRenderer = document.querySelector("#" + styleID) || (function (){
 				var styleEle = document.createElement("style");
@@ -81,7 +86,7 @@
 			var renderedRuleset = "";
 			
 			var renderedMeadlessOnce = false;
-			this.styleSet.forEach(function(querySet, index, JSONstyleSheet){
+			styleSet.forEach(function(querySet, index, JSONstyleSheet){
 				
 				if (typeof querySet.mediaQuery != "undefined"){ // there's a media query with this set
 					renderedRuleset += buildStyle(querySet.mediaQuery, querySet.ruleCluster);
